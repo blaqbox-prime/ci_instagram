@@ -44,8 +44,14 @@ p{
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-    scrollbar-width: thin;
+    margin: 0 auto;
+    display: flex;
 }
+
+.stories::-webkit-scrollbar {
+    display: none;
+  }
+  
 
 .post__username{
     font-weight: 600;

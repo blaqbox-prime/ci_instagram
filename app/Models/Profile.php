@@ -8,5 +8,5 @@ class Profile extends Model
 {
     protected $table = 'ciprofiles';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['bio', 'website' ,'category', 'user'];
+    protected $allowedFields = ['bio', 'website' ,'category', 'picture' ,'user'];
 }

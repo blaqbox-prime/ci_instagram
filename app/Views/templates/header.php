@@ -14,28 +14,36 @@
 <body class="bg-light">
 
 <!-- HEADER: MENU + HEROE SECTION -->
-<header class="header mb-4 p-2 bg-light border-bottom shadow-4">
+<header class="header mb-4 p-2 bg-light border-bottom shadow-4 container-fluid">
 
-	<nav class="navbar navbar-light container">
-		<div class="row justify-space-between w-100">
+	<nav class="navbar navbar-light container navbar-expand-lg">
+			<div class="row justify-space-between w-100 align-items-center">
 
-        <a href="#" class="navbar-brand col nav-link">CI-Instagram</a>
+			<a href="/" class="col-auto navbar-brand nav-link">CI-Instagram</a>
     
-        <form class="d-flex col-3">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        </form>
-
-        <ul class="col-4 flex-row align-items-center navbar-nav justify-content-end" >
-			<?php if(session()->get('loggedUser') !== null) : ?>
-				<li class="nav-item mx-2" ><a class="" href="<?= '/'.session()->get('loggedUser').'/post/create' ?>"><img src="<?= base_url('/icons/shutter.png')?>" alt="" class="icon"></a></li>
-				<li class="nav-item mx-2" ><a class="nav-link" href="<?= '/'.session()->get('loggedUser') ?>"><?= session()->get('loggedUser') ?></a></li>
-				<li class="nav-item mx-2"><a class="nav-link" href="<?= site_url('auth/signout')?>">Sign Out</a></li>
-			<?php endif ?> 
-			<?php if(session()->get('loggedUser') == null) : ?>
-				<li class="nav-item mx-2" ></li>
-				<li class="nav-item mx-2"><a class="nav-link" href="<?= site_url('/auth')?>">Sign in</a></li>
-			<?php endif ?> 
-			</ul>
+		
+			<!-- toggle drop down -->
+			<button class="navbar-toggler justify-content-end col-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse col-auto navbar-collapse justify-content-end row" id="navbarText">
+				
+				<ul class=" d-flex align-items-center navbar-nav justify-content-end" >
+					<form class="d-flex col-md-6 col">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					</form>
+				<?php if(session()->get('loggedUser') !== null) : ?>
+					<li class="nav-item mx-2 py-2" ><a class="" href="<?= '/'.session()->get('loggedUser').'/post/create' ?>"><img src="<?= base_url('/icons/shutter.png')?>" alt="" class="icon"></a></li>
+					<li class="nav-item mx-2 " ><a class="nav-link" href="<?= '/'.session()->get('loggedUser') ?>"><?= session()->get('loggedUser') ?></a></li>
+					<li class="nav-item mx-2 "><a class="nav-link" href="<?= site_url('auth/signout')?>">Sign Out</a></li>
+				<?php endif ?> 
+				<?php if(session()->get('loggedUser') == null) : ?>
+					<li class="nav-item mx-2" ></li>
+					<li class="nav-item mx-2"><a class="nav-link" href="<?= site_url('/auth')?>">Sign in</a></li>
+				<?php endif ?> 
+				</ul>
+			</div>
         </div>
 	</nav>
 

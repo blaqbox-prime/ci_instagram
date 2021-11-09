@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\Uuid;
+use App\Models\Users;
 
 class Post extends BaseController
 {
@@ -54,22 +55,14 @@ class Post extends BaseController
             $file->move('./uploads/'.session()->get('loggedUser').'/', $newFileName);
 
             $newPath = base_url('uploads/'.session()->get('loggedUser').'/'.$newFileName);
-           
-            echo $newPath;
-
-            echo $post_uid . '<br>';
-            echo $caption . '<br>';
-            echo '<pre>';
-            var_dump($_FILES);
-            echo '</pre>';
 
             // move img to server
 
-
+                $userModel = new \App\Models\Users();
                 $postModel = new \App\Models\Post();
                 $values = [
                     'uuid' => $post_uid,
-                    'user' => session()->get('loggedUser'),
+                    'user' => $userModel->where('username',session()->get('loggedUser'))->first()['id'],
                     'image' => $newPath,
                     'description' => $caption,
                     'createdAt' => date('Y-m-d H:i:s'),

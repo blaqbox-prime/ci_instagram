@@ -1,9 +1,17 @@
 <div class="profile container">
     <section class="profile__header row mb-5">
-        <div class="col-4">
-            <img src="https://cdn.pixabay.com/photo/2019/04/06/10/17/harley-4107104__340.jpg" alt="harley-avatar" class="avatar-lg rounded-circle"/>
+    
+    <?php if($picture !== null) :?>
+    <div class="col-4">
+            <img src="<?= $picture?>" alt="harley-avatar" class="avatar-lg rounded-circle"/>
         </div>
-        <div class="col-8">
+    <?php else : ?>
+        <div class="col-4">
+            <img src="https://www.freepnglogos.com/uploads/logo-ig-png/logo-ig-instagram-png-transparent-instagram-images-pluspng-3.png" alt="harley-avatar" class="avatar-lg rounded-circle"/>
+        </div>
+    <?php endif ?>
+    
+    <div class="col-8">
             <div class="row d-flex align-items-center">
                     <h1 class="display-6 col"><?= $username ?> </h1>
 
@@ -14,13 +22,13 @@
                     </form>
                 <?php endif ?>
                 <!-- Follow -->
-                <?php if($username !== session()->get('loggedUser') && !$following)  : ?>
+                <?php if($username !== session()->get('loggedUser') && !$following && session()->has('loggedUser'))  : ?>
                     <form action="<?= base_url('profile/follow/'.$username)?>" class="col-3 d-flex">
                         <button class="btn btn-primary w-100">Follow</button>
                     </form>
                 <?php endif ?>
                 <!-- Unfollow --> 
-                <?php if($username !== session()->get('loggedUser') && $following) : ?>
+                <?php if($username !== session()->get('loggedUser') && $following && session()->has('loggedUser')) : ?>
                         <form action="<?= base_url('profile/unfollow/'.$username)?>" class="col-3 d-flex">
                         <button class="btn w-100">Unfollow</button>
                     </form>
@@ -34,13 +42,27 @@
             </div>
             <div class="user-info">
                 <p><strong><?= $name?></strong></p>
-                <p class="text-gray">Personal Blog</p>
+
+                <!-- Category -->
+                <?php if($category !== null) : ?>
+                <p class="text-gray"><?= $category ?></p>
+                <?php endif ?>
+                <!-- Bio -->
+                <?php if($bio !== null) :?>
                 <p class="bio">
-                    Evil😈 | Fun🥂 | Food🌮 <br>
+
+                    <?= $bio?>
+
+                    <!-- Evil😈 | Fun🥂 | Food🌮 <br>
                     Ride or die with Mr J 🃏 <br>
                     Arkham Asylum alumni 🩺 <br> 
-                    📍 Gotham City
+                    📍 Gotham City -->
                 </p>
+                <?php endif ?>
+                <!-- website -->
+                <?php if($website !== null) : ?>
+                    <a style="display: block; text-decoration: none;" class=""href="<?= $website?>" target="_blank"><?= $website ?></a>
+                <?php endif ?> 
                 <small class="followedby text-gray">
                     Followed by 
                     <strong>catwoman, batman, joker, ivytheplantqueen</strong> 
@@ -53,16 +75,11 @@
     <hr>
 
     <section class="user-photos row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-5">
-        <img src="http://localhost:8080/uploads/harleyquinn/87ec52ce-4ca4-48d1-9950-440b19adba25.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2018/08/15/18/28/girl-3608767__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2018/08/15/18/28/girl-3608765__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2019/04/06/10/17/harley-4107104__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2018/08/17/17/09/woman-3613383__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2018/08/15/18/26/girl-3608758__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2017/03/24/22/14/cosplay-2172325__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2019/05/27/14/25/harley-quinn-4232828__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2017/04/13/14/15/mcdonalds-2227657__340.jpg" alt="" class="col">
-        <img src="https://cdn.pixabay.com/photo/2015/03/09/10/22/playing-cards-665390__340.jpg" alt="" class="col">
+
+    <?php foreach ($posts as $post) :?>
+        <img src="<?= $post['image']?>" alt="" class="col">
+    <?php endforeach ?>
+
     </section>
 
 </div> 
