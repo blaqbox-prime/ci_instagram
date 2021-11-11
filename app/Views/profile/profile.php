@@ -2,35 +2,35 @@
     <section class="profile__header row mb-5">
     
     <?php if($picture !== null) :?>
-    <div class="col-4">
+    <div class="col-md-4 col-12 d-flex">
             <img src="<?= $picture?>" alt="harley-avatar" class="avatar-lg rounded-circle"/>
         </div>
     <?php else : ?>
-        <div class="col-4">
+        <div class="col-md-4 col-12 d-flex">
             <img src="https://www.freepnglogos.com/uploads/logo-ig-png/logo-ig-instagram-png-transparent-instagram-images-pluspng-3.png" alt="harley-avatar" class="avatar-lg rounded-circle"/>
         </div>
     <?php endif ?>
     
-    <div class="col-8">
+    <div class="col-md-8 col-12">
             <div class="row d-flex align-items-center">
-                    <h1 class="display-6 col"><?= $username ?> </h1>
+                    <h1 class="display-6 col-12 col-sm"><?= $username ?> </h1>
 
                 <!-- Edit Profile -->
                 <?php if($username == session()->get('loggedUser'))  : ?>
-                    <form action="<?= base_url('profile/edit')?>" class="col-3 d-flex">
+                    <form action="<?= base_url('profile/edit')?>" class="col-12 col-sm-9 d-flex">
                         <button class="btn btn-outline-secondary w-100">Edit Profile</button>
                     </form>
                 <?php endif ?>
                 <!-- Follow -->
                 <?php if($username !== session()->get('loggedUser') && !$following && session()->has('loggedUser'))  : ?>
-                    <form action="<?= base_url('profile/follow/'.$username)?>" class="col-3 d-flex">
+                    <form action="<?= base_url('profile/follow/'.$username)?>" class="col-12 col-sm-9 d-flex">
                         <button class="btn btn-primary w-100">Follow</button>
                     </form>
                 <?php endif ?>
                 <!-- Unfollow --> 
                 <?php if($username !== session()->get('loggedUser') && $following && session()->has('loggedUser')) : ?>
-                        <form action="<?= base_url('profile/unfollow/'.$username)?>" class="col-3 d-flex">
-                        <button class="btn w-100">Unfollow</button>
+                        <form action="<?= base_url('profile/unfollow/'.$username)?>" class="col-sm-3 col-12 d-flex">
+                        <button class="btn btn-outline-secondary w-100">Unfollow</button>
                     </form>
                 <?php endif ?>    
                 <!-- Dont Show -->

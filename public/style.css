@@ -23,6 +23,18 @@ p{
     cursor: pointer;
 
 }
+
+@media screen and (max-width: 512px){
+    .avatar-lg{
+        height: 15px;
+        width: 15px;
+        object-fit: cover;
+        object-position: center;
+        cursor: pointer;
+        margin: 0 auto;
+    }
+}
+
 .avatar-lg{
     height: 200px;
     width: 200px;

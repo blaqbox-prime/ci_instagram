@@ -172,11 +172,10 @@ class Profile extends BaseController
                 ]
                 ],
             'username' => [
-                'rules' => 'required|max_length[25]|is_unique[users.username]',
+                'rules' => 'required|max_length[25]',
                 'errors' => [
                     'required' => 'Username is required',
                     'max_length' => 'Username must not exceed 25 characters',
-                    'is_unique' => 'Username already taken',
                 ]
                 ],
             'category' => [
@@ -209,8 +208,6 @@ class Profile extends BaseController
             return $this->view('/profile/edit',$data);
         } else {
 
-            var_dump($this->request->getPost('bio'));
-
             // get logged User's id
         $userModel = new Users();
         $loggedUserId = $userModel->where('username', session()->get('loggedUser'))->first()['id'];
@@ -228,10 +225,16 @@ class Profile extends BaseController
             
             $Uuid = new Uuid();
             $profileImg_uid = $Uuid->v4();
-            $newFileName = $profileImg_uid.'.'.$file->guessExtension();
-            $file->move('./uploads/'.session()->get('loggedUser').'/', $newFileName);
 
-            $newPath = base_url('uploads/'.session()->get('loggedUser').'/'.$newFileName);
+            var_dump($file);
+
+            // if new picture is uploaded. save to server and create a new path string
+            if($file->getBasename() !== ""){
+                $newFileName = $profileImg_uid.'.'.$file->guessExtension();
+                $file->move('./uploads/'.session()->get('loggedUser').'/', $newFileName);
+
+                $newPath = base_url('uploads/'.session()->get('loggedUser').'/'.$newFileName);
+            }
 
             // move img to server
                 
@@ -242,8 +245,12 @@ class Profile extends BaseController
                 'bio' => $bio,
                 'website' => $website,
                 'category' => $category,
-                'picture' => $newPath,
             ];
+
+            // if image was stored to server, save path to db
+            if(isset($newPath)){
+                $profile_data['picture'] = $newPath;
+            }
 
 
 

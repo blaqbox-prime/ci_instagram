@@ -17,13 +17,21 @@
         <!-- ------------------------------------------------------ -->
         <div class="form-group">
             <label for="caption" class="form-label">Category</label>
-            <select class="form-select" name="category" id="category" value="<?= $category?>">
-                <option value='null'></option>
-                <option value="Personal Blog">Personal Blog</option>
+            <select class="form-select" name="category" id="category">
+                <option value='' selected disabled hidden>Select a category</option>
+                
+                <?php foreach (['Personal Blog', "Artist", "Clothing Brand", "Super Hero", "Super Villain"] as $option):?>
+                    <option value="<?= $option ?>"
+                     <?php if($option == $category):?> selected <?php endif?> >
+                         <?= $option ?>
+                    </option>
+                <?php endforeach ?>
+                
+                <!-- <option value="Personal Blog">Personal Blog</option>
                 <option value="Artist">Artist</option>
                 <option value="Clothing Brand">Clothing Brand</option>
                 <option value="Super Hero">Super Hero</option>
-                <option value="Super Villain">Super Villain</option>
+                <option value="Super Villain">Super Villain</option> -->
             </select>
             <span class="text-danger"><?= isset($validation) ? display_error($validation,'category') : ""?></span>
         </div>
@@ -36,7 +44,7 @@
         <!-- ------------------------------------------------------ -->
         <div class="form-group">
             <label for="caption" class="form-label">Bio</label>
-            <textarea class="form-control" name="bio" id="bio" value="<?= $bio?>"></textarea>
+            <textarea class="form-control" name="bio" id="bio" ><?= $bio?></textarea>
             <span class="text-danger"><?= isset($validation) ? display_error($validation,'bio') : ""?></span>
         </div>
 
