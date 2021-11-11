@@ -14,7 +14,7 @@ class Feed extends BaseController
         $userModel = new Users();
         $profileModel = new Profile();
 
-        $posts = $postModel->findAll();
+        $posts = $postModel->findAll(10);
         $feedPosts = [];
         
         foreach ($posts as $post) {
@@ -22,11 +22,11 @@ class Feed extends BaseController
             $profileImg = $profileModel->where('user',$post['user'])->first()['picture'];
             $feedPosts[$post['id']] = ['post' => $post, 'user' => $user_info, 'picture' => $profileImg];
         }
-        return $this->view('/feed/index',['title' => 'Feed', 'feedPosts' => $feedPosts]);
+        return $this->view('/feed/index',['title' => 'Feed', 'feedPosts' => array_reverse($feedPosts)]);
     }
 
     public function view($page, $data){       
-        echo view('/templates/header', ["title" => $data->title]);
+        echo view('/templates/header', ["title" => $data['title']]);
         echo view($page,$data);
         
     }

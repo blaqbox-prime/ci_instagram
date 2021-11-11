@@ -46,7 +46,7 @@
                     <div class="post__content">
                         <p class="likes mb-1"><strong>1,878 likes</strong></p>
                         <p class="descr">
-                            <strong><?= $post['user']['username']?></strong> <?= $post['description']?>
+                            <strong><?= $post['user']['username']?></strong> <?= $post['post']['description']?>
                             <span class="hashtag">#catwoman #birdsofprey #brucesucks #batman #harlylover</span>
                         </p>
                         <p class="text-gray mb-1">View all 22 comments</p>

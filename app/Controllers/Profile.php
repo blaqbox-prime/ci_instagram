@@ -35,7 +35,7 @@ class Profile extends BaseController
             'category' => $profile['category'],
             'bio' => $profile['bio'],
             'website' => $profile['website'],
-            'posts' => $posts,
+            'posts' => array_reverse($posts),
         ];
 
         // if user doesnt exist return page not found
